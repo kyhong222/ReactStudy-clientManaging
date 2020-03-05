@@ -1,6 +1,5 @@
 import React from 'react';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
+import { TableRow, TableCell } from '@material-ui/core';
 
 class Customer extends React.Component {
     state = {
@@ -11,13 +10,13 @@ class Customer extends React.Component {
         job: '직업'
 
     }
-    
-    render(){
+
+    render() {
         const {
             id, name, birthday, gender, job
         } = this.props.info;
 
-        return(
+        return (
             // <div>
             //     <div><h2>{this.state.name}</h2></div>
             //     <div>{this.state.id}</div>
@@ -31,14 +30,15 @@ class Customer extends React.Component {
             //     <div>{gender}</div>
             //     <div>{job}</div>
             // </div>
-            <TableRow>
-                <TableCell><b>{name}</b></TableCell>
-                <TableCell>{id}</TableCell>
-                <TableCell>{birthday}</TableCell>
-                <TableCell>{gender}</TableCell>
-                <TableCell>{job}</TableCell>    
-            </TableRow>
+
             
+                <TableRow>
+                    <TableCell><b>{name}</b></TableCell>
+                    <TableCell>{id}</TableCell>
+                    <TableCell>{birthday}</TableCell>
+                    <TableCell>{gender}</TableCell>
+                    <TableCell>{job}</TableCell>
+                </TableRow>
         );
     }
 }

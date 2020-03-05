@@ -45,20 +45,20 @@ class App extends Component {
     return (
 
       <div>
-      <Table>
-        <TableHead>
-          <TableRow>
-          <TableCell>No.</TableCell>
-          <TableCell>ID</TableCell>
-          <TableCell>Birthday</TableCell>
-          <TableCell>Gender</TableCell>
-          <TableCell>Job</TableCell>
-          </TableRow>
-        </TableHead>
-      </Table>
-      <TableBody>
-        {list}
-      </TableBody>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>ID</TableCell>
+              <TableCell>Birthday</TableCell>
+              <TableCell>Gender</TableCell>
+              <TableCell>Job</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {list}
+          </TableBody>
+        </Table>
       </div>
     );
   }
