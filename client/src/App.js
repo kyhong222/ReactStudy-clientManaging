@@ -1,67 +1,66 @@
 import React, { Component } from 'react';
 import Customer from './components/Customer';
-import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
-
-
+import { Table, TableHead, TableBody, TableRow, TableCell, Paper } from '@material-ui/core';
+//import Paper from '@material-ui/core/Paper'
 import './App.css';
 
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  root: {
+    width: "100%",
+    marginTop: theme.spacing.unit * 3,
+    overflowX: "auto"
+  },
+  table: {
+    minWidth: 1080
+  }
+});
+
 class App extends Component {
+
   state = {
-    data: [
-      {
-        id: 0,
-        name: 'kim',
-        birthday: '960222',
-        gender: 'M',
-        job: 'Doctor'
-      },
-      {
-        id: 1,
-        name: 'park',
-        birthday: '920123',
-        gender: 'F',
-        job: 'Teacher'
-      },
-      {
-        id: 2,
-        name: 'choi',
-        birthday: '900304',
-        gender: 'M',
-        job: 'Trainer'
-      },
-    ]
+    customers: ''
   }
 
-  render() {
-    const { data } = this.state;
-    const list = data.map(
-      info => (
-        <Customer
-          key={info.id}
-          info={info}
-        />
-      )
-    )
-    return (
+  componentDidMount() {
+    this.callApi()
+      .then(res => this.setState({ customers: res }))
+      .catch(err => console.log(err));
+  }
 
-      <div>
-        <Table>
+  callApi = async () => {
+    const response = await fetch('/api/customers');
+    const body = await response.json();
+    return body;
+  }
+
+
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <Paper className={classes.root}>
+        <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>ID</TableCell>
-              <TableCell>Birthday</TableCell>
-              <TableCell>Gender</TableCell>
-              <TableCell>Job</TableCell>
+              <TableCell>번호</TableCell>
+              <TableCell>이름</TableCell>
+              <TableCell>생년월일</TableCell>
+              <TableCell>성별</TableCell>
+              <TableCell>직업</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {list}
+            {this.state.customers ? this.state.customers.map(c => {
+              return <Customer key={c.id} id={c.id} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job} />
+            }) : ''}
           </TableBody>
         </Table>
-      </div>
+      </Paper>
     );
   }
 }
 
-export default App;
+
+export default withStyles(styles)(App);
