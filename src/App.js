@@ -1,26 +1,67 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Customer from './components/Customer';
+import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
+
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    data: [
+      {
+        id: 0,
+        name: 'kim',
+        birthday: '960222',
+        gender: 'M',
+        job: 'Doctor'
+      },
+      {
+        id: 1,
+        name: 'park',
+        birthday: '920123',
+        gender: 'F',
+        job: 'Teacher'
+      },
+      {
+        id: 2,
+        name: 'choi',
+        birthday: '900304',
+        gender: 'M',
+        job: 'Trainer'
+      },
+    ]
+  }
+
+  render() {
+    const { data } = this.state;
+    const list = data.map(
+      info => (
+        <Customer
+          key={info.id}
+          info={info}
+        />
+      )
+    )
+    return (
+
+      <div>
+      <Table>
+        <TableHead>
+          <TableRow>
+          <TableCell>No.</TableCell>
+          <TableCell>ID</TableCell>
+          <TableCell>Birthday</TableCell>
+          <TableCell>Gender</TableCell>
+          <TableCell>Job</TableCell>
+          </TableRow>
+        </TableHead>
+      </Table>
+      <TableBody>
+        {list}
+      </TableBody>
+      </div>
+    );
+  }
 }
 
 export default App;
