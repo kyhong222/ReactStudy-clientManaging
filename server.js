@@ -1,7 +1,17 @@
+const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 5000;
+
+// mongoDB server connection code
+mongoose.connect(`mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb`);
+const db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', () => {
+    console.log('connected to mongoDB server');
+});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
